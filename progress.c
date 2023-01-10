@@ -8,6 +8,11 @@
  * published by the Free Software Foundation.
  */
 
+#ifdef __TANDEM
+# define _FLOSS_USE_SETITIMER 1
+# include <floss.h(FLOSS_SETITIMER)>
+#endif
+
 #define GIT_TEST_PROGRESS_ONLY
 #include "cache.h"
 #include "gettext.h"
@@ -16,6 +21,7 @@
 #include "trace.h"
 #include "utf8.h"
 #include "config.h"
+
 
 #define TP_IDX_MAX      8
 

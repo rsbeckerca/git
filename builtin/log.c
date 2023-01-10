@@ -4,6 +4,11 @@
  * (C) Copyright 2006 Linus Torvalds
  *		 2006 Junio Hamano
  */
+#ifdef __TANDEM
+# define _FLOSS_USE_SETITIMER 1
+# include <floss.h(FLOSS_SETITIMER)>
+#endif
+
 #include "cache.h"
 #include "config.h"
 #include "refs.h"
