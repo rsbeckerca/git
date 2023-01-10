@@ -17,6 +17,8 @@
 #include "utf8.h"
 #include "config.h"
 
+#include <floss.h(FLOSS_SETITIMER)>
+
 #define TP_IDX_MAX      8
 
 struct throughput {
