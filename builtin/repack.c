@@ -307,6 +307,7 @@ static int write_oid(const struct object_id *oid,
 		     struct packed_git *pack UNUSED,
 		     uint32_t pos UNUSED, void *data)
 {
+	int err;
 	struct child_process *cmd = data;
 
 	if (cmd->in == -1) {
@@ -314,8 +315,12 @@ static int write_oid(const struct object_id *oid,
 			die(_("could not start pack-objects to repack promisor objects"));
 	}
 
-	xwrite(cmd->in, oid_to_hex(oid), the_hash_algo->hexsz);
-	xwrite(cmd->in, "\n", 1);
+	err = write_in_full(cmd->in, oid_to_hex(oid), the_hash_algo->hexsz);
+	if (err <= 0)
+		return err;
+	err = write_in_full(cmd->in, "\n", 1);
+	if (err <= 0)
+		return err;
 	return 0;
 }
 
