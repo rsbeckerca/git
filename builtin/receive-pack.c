@@ -456,7 +456,7 @@ static void report_message(const char *prefix, const char *err, va_list params)
 	if (use_sideband)
 		send_sideband(1, 2, msg, sz, use_sideband);
 	else
-		xwrite(2, msg, sz);
+		write_in_full(2, msg, sz);
 }
 
 __attribute__((format (printf, 1, 2)))
